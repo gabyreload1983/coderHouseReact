@@ -4,7 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 
 import CartWidget from "./CartWidget";
 
-const CustomNavBar = () => {
+const NavBar = () => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
@@ -12,11 +12,11 @@ const CustomNavBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#Categoria1">Categoria1</Nav.Link>
-            <Nav.Link href="#Categoria2">Categoria2</Nav.Link>
-            <Nav.Link href="#Categoria3">Categoria3</Nav.Link>
+            <Nav.Link href="#Categoria2">Celulares</Nav.Link>
+            <Nav.Link href="#Categoria3">Monitores</Nav.Link>
+            <Nav.Link href="#Categoria1">Notebooks</Nav.Link>
           </Nav>
-          <Nav className="ms-auto">
+          <Nav>
             <Nav.Link href="#cart">
               <CartWidget />
             </Nav.Link>
@@ -27,4 +27,4 @@ const CustomNavBar = () => {
   );
 };
 
-export default CustomNavBar;
+export default NavBar;

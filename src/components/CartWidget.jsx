@@ -1,7 +1,7 @@
-import { BsFillCartFill } from "react-icons/bs";
+import { BsCart3 } from "react-icons/bs";
 
 const CartWidget = () => {
-  return <BsFillCartFill />;
+  return <BsCart3 size={25} />;
 };
 
 export default CartWidget;

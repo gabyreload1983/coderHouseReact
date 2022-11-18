@@ -1,11 +1,11 @@
-import CustomNavBar from "./components/CustomNavBar";
+import NavBar from "./components/NavBar";
 import ItemListContainer from "./components/ItemListContainer";
 
 const App = () => {
   return (
     <>
-      <CustomNavBar />
-      <ItemListContainer greeting="Mensaje." />
+      <NavBar />
+      <ItemListContainer greeting="Bienvenidos." />
     </>
   );
 };
