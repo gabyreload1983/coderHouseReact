@@ -1,14 +1,13 @@
-import "./App.css";
-import NavBar from "./components/NavBar";
+import CustomNavBar from "./components/CustomNavBar";
 import ItemListContainer from "./components/ItemListContainer";
 
-function App() {
+const App = () => {
   return (
     <>
-      <NavBar />
-      <ItemListContainer greeting="Mensaje..." />
+      <CustomNavBar />
+      <ItemListContainer greeting="Mensaje." />
     </>
   );
-}
+};
 
 export default App;

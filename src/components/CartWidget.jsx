@@ -1,5 +1,7 @@
+import { BsFillCartFill } from "react-icons/bs";
+
 const CartWidget = () => {
-  return <span>Icono</span>;
+  return <BsFillCartFill />;
 };
 
 export default CartWidget;
