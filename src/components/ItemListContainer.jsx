@@ -4,13 +4,16 @@ import { useEffect, useState } from "react";
 import { fetchData } from "../utils/fetchData";
 import { productsDatabase } from "../utils/productsDatabase";
 import { useParams } from "react-router-dom";
+import { BarLoader } from "react-spinners";
 
 const ItemListContainer = (props) => {
   const [items, setItems] = useState([]);
+  const [load, setLoad] = useState(false);
   const { categoryId } = useParams();
 
   useEffect(() => {
     async function getData() {
+      setLoad(true);
       try {
         const result = await fetchData(
           2000,
@@ -23,6 +26,8 @@ const ItemListContainer = (props) => {
         setItems(result);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoad(false);
       }
     }
     getData();
@@ -30,6 +35,7 @@ const ItemListContainer = (props) => {
 
   return (
     <Container className="mt-5">
+      {load && <BarLoader width="100%" color="#36d7b7" className="mb-3" />}
       <ItemList items={items} />
     </Container>
   );

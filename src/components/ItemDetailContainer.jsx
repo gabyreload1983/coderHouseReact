@@ -3,6 +3,7 @@ import { fetchData } from "../utils/fetchData";
 import { productsDatabase } from "../utils/productsDatabase";
 import ItemDetail from "./ItemDetail";
 import { useParams } from "react-router-dom";
+import { Container } from "react-bootstrap";
 
 function ItemDetailContainer(props) {
   const [item, setItem] = useState({});
@@ -23,7 +24,11 @@ function ItemDetailContainer(props) {
     getItem();
   }, [itemId]);
 
-  return <ItemDetail item={item} />;
+  return (
+    <Container className="mt-5 d-flex justify-content-center">
+      <ItemDetail item={item} />;
+    </Container>
+  );
 }
 
 export default ItemDetailContainer;
