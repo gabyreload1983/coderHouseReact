@@ -8,12 +8,12 @@ import { BarLoader } from "react-spinners";
 
 const ItemListContainer = (props) => {
   const [items, setItems] = useState([]);
-  const [load, setLoad] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { categoryId } = useParams();
 
   useEffect(() => {
     async function getData() {
-      setLoad(true);
+      setLoading(true);
       try {
         const result = await fetchData(
           2000,
@@ -27,7 +27,7 @@ const ItemListContainer = (props) => {
       } catch (error) {
         console.log(error);
       } finally {
-        setLoad(false);
+        setLoading(false);
       }
     }
     getData();
@@ -35,7 +35,7 @@ const ItemListContainer = (props) => {
 
   return (
     <Container className="mt-5">
-      {load && <BarLoader width="100%" color="#36d7b7" className="mb-3" />}
+      {loading && <BarLoader width="100%" color="#36d7b7" className="mb-3" />}
       <ItemList items={items} />
     </Container>
   );
