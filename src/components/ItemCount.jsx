@@ -27,7 +27,7 @@ function ItemCount({ stock, initial, onAdd }) {
       >
         -
       </Button>
-      <span className="p-2 border">{count}</span>
+      <span className="p-2 border">{stock ? count : 0}</span>
       <Button
         variant="outline-success"
         size="sm"
