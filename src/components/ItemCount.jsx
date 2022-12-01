@@ -6,11 +6,7 @@ function ItemCount({ stock, initial, onAdd }) {
   const [count, setCount] = useState(initial);
 
   useEffect(() => {
-    if (stock) {
-      setCount(initial);
-    } else {
-      setCount(0);
-    }
+    setCount(initial);
   }, []);
 
   const increment = () => {
@@ -27,7 +23,7 @@ function ItemCount({ stock, initial, onAdd }) {
         variant="outline-danger"
         size="sm"
         onClick={decrement}
-        disabled={count === initial || stock === 0 ? true : false}
+        disabled={count === initial || !stock ? true : false}
       >
         -
       </Button>
@@ -36,7 +32,7 @@ function ItemCount({ stock, initial, onAdd }) {
         variant="outline-success"
         size="sm"
         onClick={increment}
-        disabled={count === stock ? true : false}
+        disabled={count === stock || !stock ? true : false}
       >
         +
       </Button>

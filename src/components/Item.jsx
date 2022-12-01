@@ -1,9 +1,10 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 
 function Item({ item }) {
-  const { pictureUrl, title, price, stock } = item;
+  const { id, pictureUrl, title, price, stock } = item;
 
   return (
     <Card style={{ width: "18rem" }}>
@@ -14,7 +15,9 @@ function Item({ item }) {
       <Card.Footer>
         <Card.Text>Precio: ${price}</Card.Text>
         <Card.Text>Stock: {stock}</Card.Text>
-        <Button variant="primary w-100">Ver detalle</Button>
+        <Button as={Link} to={`/item/${id}`} variant="primary w-100">
+          Ver detalle
+        </Button>
       </Card.Footer>
     </Card>
   );
