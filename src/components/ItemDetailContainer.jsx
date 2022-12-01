@@ -26,7 +26,7 @@ function ItemDetailContainer(props) {
 
   return (
     <Container className="mt-5 d-flex justify-content-center">
-      <ItemDetail item={item} />;
+      <ItemDetail item={item} />
     </Container>
   );
 }

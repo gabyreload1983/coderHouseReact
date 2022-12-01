@@ -12,20 +12,25 @@ function ItemDetail({ item }) {
   };
 
   return (
-    <Card style={{ width: "20rem" }} className="ms-auto me-auto mt-3">
-      <Card.Img variant="top" src={pictureUrl} />
-      <Card.Body>
-        {!pictureUrl && <BarLoader width="100%" color="#36d7b7" />}
-        <Card.Title>{title}</Card.Title>
-        <Card.Text>${price}</Card.Text>
-        <Card.Text>{description}</Card.Text>
-        <ItemCount initial={1} stock={stock} onAdd={handleAdd} />
-      </Card.Body>
-      <Card.Footer>
-        <Card.Text>Stock: {stock}</Card.Text>
-        <Button className="w-100">Regresar</Button>
-      </Card.Footer>
-    </Card>
+    <>
+      {!pictureUrl ? (
+        <BarLoader width="100%" color="#36d7b7" />
+      ) : (
+        <Card style={{ width: "20rem" }} className="ms-auto me-auto mt-3">
+          <Card.Img variant="top" src={pictureUrl} />
+          <Card.Body>
+            <Card.Title>{title}</Card.Title>
+            <Card.Text>${price}</Card.Text>
+            <Card.Text>{description}</Card.Text>
+            <ItemCount initial={1} stock={stock} onAdd={handleAdd} />
+          </Card.Body>
+          <Card.Footer>
+            <Card.Text>Stock: {stock}</Card.Text>
+            <Button className="w-100">Regresar</Button>
+          </Card.Footer>
+        </Card>
+      )}
+    </>
   );
 }
 
