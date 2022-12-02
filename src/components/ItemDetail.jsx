@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import ItemCount from "./ItemCount";
@@ -6,10 +6,13 @@ import { BarLoader } from "react-spinners";
 
 function ItemDetail({ item }) {
   const { pictureUrl, title, price, description, stock } = item;
+  const [quantity, setQuantity] = useState(0);
 
   const handleAdd = (quantity) => {
-    alert(`Agregaste ${quantity} productos al carrito`);
+    setQuantity(quantity);
   };
+
+  console.log(quantity);
 
   return (
     <>
@@ -22,7 +25,9 @@ function ItemDetail({ item }) {
             <Card.Title>{title}</Card.Title>
             <Card.Text>${price}</Card.Text>
             <Card.Text>{description}</Card.Text>
-            <ItemCount initial={1} stock={stock} onAdd={handleAdd} />
+            {!quantity && (
+              <ItemCount initial={1} stock={stock} onAdd={handleAdd} />
+            )}
           </Card.Body>
           <Card.Footer>
             <Card.Text>Stock: {stock}</Card.Text>
