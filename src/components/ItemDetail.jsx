@@ -3,6 +3,9 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import ItemCount from "./ItemCount";
 import { BarLoader } from "react-spinners";
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ItemDetail({ item }) {
   const { pictureUrl, title, price, description, stock } = item;
@@ -10,9 +13,22 @@ function ItemDetail({ item }) {
 
   const handleAdd = (quantity) => {
     setQuantity(quantity);
+    toast.success(
+      `Agregaste ${quantity} ${
+        quantity === 1 ? "producto" : "productos"
+      } al carrito.`,
+      {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      }
+    );
   };
-
-  console.log(quantity);
 
   return (
     <>
@@ -25,7 +41,11 @@ function ItemDetail({ item }) {
             <Card.Title>{title}</Card.Title>
             <Card.Text>${price}</Card.Text>
             <Card.Text>{description}</Card.Text>
-            {!quantity && (
+            {quantity ? (
+              <Button as={Link} to="/cart" className="w-100">
+                Ir al Carrito
+              </Button>
+            ) : (
               <ItemCount initial={1} stock={stock} onAdd={handleAdd} />
             )}
           </Card.Body>
@@ -33,6 +53,18 @@ function ItemDetail({ item }) {
             <Card.Text>Stock: {stock}</Card.Text>
             <Button className="w-100">Regresar</Button>
           </Card.Footer>
+          <ToastContainer
+            position="top-center"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+          />
         </Card>
       )}
     </>
