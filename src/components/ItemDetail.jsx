@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import ItemCount from "./ItemCount";
@@ -6,13 +6,17 @@ import { BarLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { CartContext } from "../context/CartContext";
 
 function ItemDetail({ item }) {
   const { pictureUrl, title, price, description, stock } = item;
+
   const [quantity, setQuantity] = useState(0);
+  const { addItem } = useContext(CartContext);
 
   const handleAdd = (quantity) => {
     setQuantity(quantity);
+    addItem(item, quantity);
     toast.success(
       `Agregaste ${quantity} ${
         quantity === 1 ? "producto" : "productos"
