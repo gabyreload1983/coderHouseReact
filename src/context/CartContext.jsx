@@ -25,9 +25,20 @@ const CartContextProvider = ({ children }) => {
   const isInCart = (id) => {
     return cartList.find((item) => item.id === id);
   };
+  const calcSubtotal = (id) => {
+    const index = cartList.findIndex((i) => i.id === id);
+    return cartList[index].quantity * cartList[index].price;
+  };
+  const calcTotal = () => {
+    return cartList.reduce((acc, item) => {
+      return acc + item.quantity * item.price;
+    }, 0);
+  };
 
   return (
-    <CartContext.Provider value={{ cartList, addItem, removeItem, clear }}>
+    <CartContext.Provider
+      value={{ cartList, addItem, removeItem, clear, calcSubtotal, calcTotal }}
+    >
       {children}
     </CartContext.Provider>
   );
