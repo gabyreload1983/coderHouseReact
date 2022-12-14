@@ -7,17 +7,13 @@ const CartContextProvider = ({ children }) => {
 
   const addItem = (item, quantity) => {
     if (isInCart(item.id)) {
-      setCartList(
-        cartList.map((product) => {
-          if (product.id === item.id) {
-            return { ...product, quantity: product.quantity + quantity };
-          } else {
-            return product;
-          }
-        })
-      );
+      const copyCart = [...cartList];
+      const index = copyCart.findIndex((i) => i.id === item.id);
+      copyCart[index].quantity += quantity;
+      setCartList(copyCart);
     } else {
-      setCartList((prev) => [...prev, { ...item, quantity }]);
+      item.quantity = quantity;
+      setCartList((prev) => [...prev, item]);
     }
   };
   const removeItem = (itemId) => {
