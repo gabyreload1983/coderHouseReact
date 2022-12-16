@@ -55,7 +55,9 @@ function ItemDetail({ item }) {
           </Card.Body>
           <Card.Footer>
             <Card.Text>Stock: {stock}</Card.Text>
-            <Button className="w-100">Regresar</Button>
+            <Button as={Link} to="/" className="w-100">
+              Regresar
+            </Button>
           </Card.Footer>
           <ToastContainer
             position="top-center"
