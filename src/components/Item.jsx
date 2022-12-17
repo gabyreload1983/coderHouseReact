@@ -10,7 +10,7 @@ function Item({ item }) {
     <Card style={{ width: "18rem" }}>
       <Card.Img variant="top" src={pictureUrl} />
       <Card.Body className="d-flex align-items-end">
-        <Card.Title>{title}</Card.Title>
+        <Card.Title className="text-uppercase">{title}</Card.Title>
       </Card.Body>
       <Card.Footer>
         <Card.Text>Precio: ${price}</Card.Text>

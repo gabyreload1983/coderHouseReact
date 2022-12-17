@@ -42,9 +42,9 @@ function ItemDetail({ item }) {
         <Card style={{ width: "20rem" }} className="ms-auto me-auto mt-3">
           <Card.Img variant="top" src={pictureUrl} />
           <Card.Body>
-            <Card.Title>{title}</Card.Title>
+            <Card.Title className="text-uppercase">{title}</Card.Title>
             <Card.Text>${price}</Card.Text>
-            <Card.Text>{description}</Card.Text>
+            <Card.Text className="text-uppercase">{description}</Card.Text>
             {quantity ? (
               <Button as={Link} to="/cart" className="w-100">
                 Ir al Carrito
@@ -55,8 +55,8 @@ function ItemDetail({ item }) {
           </Card.Body>
           <Card.Footer>
             <Card.Text>Stock: {stock}</Card.Text>
-            <Button as={Link} to="/" className="w-100">
-              Regresar
+            <Button as={Link} variant="info" to="/" className="w-100">
+              Seguir Comprando
             </Button>
           </Card.Footer>
           <ToastContainer

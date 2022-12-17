@@ -45,7 +45,7 @@ function Cart(props) {
                     <Button onClick={() => removeItem(item.id)}>X</Button>
                   </td>
                   <td>{item.quantity}</td>
-                  <td>{item.title}</td>
+                  <td className="text-uppercase">{item.title}</td>
                   <td>$ {item.price}</td>
                   <td>$ {calcSubtotal(item.id)}</td>
                 </tr>
