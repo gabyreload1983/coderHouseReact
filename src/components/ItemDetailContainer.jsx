@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { fetchData } from "../utils/fetchData";
-import { productsDatabase } from "../utils/productsDatabase";
 import ItemDetail from "./ItemDetail";
 import { useParams } from "react-router-dom";
 import { Container } from "react-bootstrap";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../utils/firebaseConfig";
 
 function ItemDetailContainer(props) {
   const [item, setItem] = useState({});
@@ -12,11 +12,14 @@ function ItemDetailContainer(props) {
   useEffect(() => {
     async function getItem() {
       try {
-        const result = await fetchData(
-          2000,
-          productsDatabase.find((product) => product.id === Number(itemId))
-        );
-        setItem(result);
+        const docRef = doc(db, "products", itemId);
+        const product = await getDoc(docRef);
+
+        if (product.exists()) {
+          setItem({ id: product.id, ...product.data() });
+        } else {
+          console.log("No such document!");
+        }
       } catch (error) {
         console.log(error);
       }
