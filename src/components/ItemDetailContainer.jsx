@@ -17,8 +17,6 @@ function ItemDetailContainer(props) {
 
         if (product.exists()) {
           setItem({ id: product.id, ...product.data() });
-        } else {
-          console.log("No such document!");
         }
       } catch (error) {
         console.log(error);

@@ -8,12 +8,10 @@ import { db } from "../utils/firebaseConfig";
 
 const ItemListContainer = (props) => {
   const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(false);
   const { categoryId } = useParams();
 
   useEffect(() => {
     const getData = async () => {
-      setLoading(true);
       try {
         const q = query(
           collection(db, "products"),
@@ -27,8 +25,6 @@ const ItemListContainer = (props) => {
         setItems(products.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
       } catch (error) {
         console.log(error);
-      } finally {
-        setLoading(false);
       }
     };
     getData();
@@ -36,8 +32,11 @@ const ItemListContainer = (props) => {
 
   return (
     <Container className="mt-5">
-      {loading && <BarLoader width="100%" color="#36d7b7" className="mb-3" />}
-      <ItemList items={items} />
+      {items.length ? (
+        <ItemList items={items} />
+      ) : (
+        <BarLoader width="100%" color="#36d7b7" className="mb-3" />
+      )}
     </Container>
   );
 };

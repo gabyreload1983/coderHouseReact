@@ -30,15 +30,11 @@ const CartContextProvider = ({ children }) => {
     return cartList[index].quantity * cartList[index].price;
   };
   const calcTotal = () => {
-    return cartList.reduce((acc, item) => {
-      return acc + item.quantity * item.price;
-    }, 0);
+    return cartList.reduce((acc, item) => acc + item.quantity * item.price, 0);
   };
 
   const calcItems = () => {
-    return cartList.reduce((acc, item) => {
-      return acc + item.quantity;
-    }, 0);
+    return cartList.reduce((acc, item) => acc + item.quantity, 0);
   };
 
   return (
