@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import ItemCount from "./ItemCount";
-import { BarLoader } from "react-spinners";
+
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -36,43 +36,39 @@ function ItemDetail({ item }) {
 
   return (
     <>
-      {!pictureUrl ? (
-        <BarLoader width="100%" color="#36d7b7" />
-      ) : (
-        <Card style={{ width: "20rem" }} className="ms-auto me-auto mt-3">
-          <Card.Img variant="top" src={pictureUrl} />
-          <Card.Body>
-            <Card.Title className="text-uppercase">{title}</Card.Title>
-            <Card.Text>${price}</Card.Text>
-            <Card.Text className="text-uppercase">{description}</Card.Text>
-            {quantity ? (
-              <Button as={Link} to="/cart" className="w-100">
-                Ir al Carrito
-              </Button>
-            ) : (
-              <ItemCount initial={1} stock={stock} onAdd={handleAdd} />
-            )}
-          </Card.Body>
-          <Card.Footer>
-            <Card.Text>Stock: {stock}</Card.Text>
-            <Button as={Link} variant="info" to="/" className="w-100">
-              Seguir Comprando
+      <Card style={{ width: "20rem" }} className="ms-auto me-auto mt-3">
+        <Card.Img variant="top" src={pictureUrl} />
+        <Card.Body>
+          <Card.Title className="text-uppercase">{title}</Card.Title>
+          <Card.Text>${price}</Card.Text>
+          <Card.Text className="text-uppercase">{description}</Card.Text>
+          {quantity ? (
+            <Button as={Link} to="/cart" className="w-100">
+              Ir al Carrito
             </Button>
-          </Card.Footer>
-          <ToastContainer
-            position="top-center"
-            autoClose={2000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="dark"
-          />
-        </Card>
-      )}
+          ) : (
+            <ItemCount initial={1} stock={stock} onAdd={handleAdd} />
+          )}
+        </Card.Body>
+        <Card.Footer>
+          <Card.Text>Stock: {stock}</Card.Text>
+          <Button as={Link} variant="info" to="/" className="w-100">
+            Seguir Comprando
+          </Button>
+        </Card.Footer>
+      </Card>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </>
   );
 }
