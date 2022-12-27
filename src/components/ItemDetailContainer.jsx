@@ -1,32 +1,63 @@
 import React, { useEffect, useState } from "react";
-import { fetchData } from "../utils/fetchData";
-import { productsDatabase } from "../utils/productsDatabase";
 import ItemDetail from "./ItemDetail";
 import { useParams } from "react-router-dom";
 import { Container } from "react-bootstrap";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../utils/firebaseConfig";
+import { BarLoader } from "react-spinners";
+import { toast, ToastContainer } from "react-toastify";
 
-function ItemDetailContainer(props) {
+function ItemDetailContainer() {
   const [item, setItem] = useState({});
   const { itemId } = useParams();
 
   useEffect(() => {
-    async function getItem() {
-      try {
-        const result = await fetchData(
-          2000,
-          productsDatabase.find((product) => product.id === Number(itemId))
-        );
-        setItem(result);
-      } catch (error) {
-        console.log(error);
-      }
-    }
     getItem();
   }, [itemId]);
 
+  async function getItem() {
+    try {
+      const docRef = doc(db, "products", itemId);
+      const product = await getDoc(docRef);
+
+      if (product.exists()) {
+        setItem({ id: product.id, ...product.data() });
+      } else {
+        toast.warn("NO EXISTE ESE PRODUCTO!", {
+          position: "top-center",
+          autoClose: false,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          closeButton: false,
+          theme: "dark",
+          toastId: itemId,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <Container className="mt-5 d-flex justify-content-center">
-      <ItemDetail item={item} />
+      {!item.id ? (
+        <BarLoader width="100%" color="#36d7b7" />
+      ) : (
+        <ItemDetail item={item} />
+      )}
+      <ToastContainer
+        position="top-center"
+        autoClose={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable={false}
+        theme="dark"
+      />
     </Container>
   );
 }

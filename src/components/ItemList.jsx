@@ -4,9 +4,9 @@ import Item from "./Item";
 
 function ItemList({ items }) {
   return (
-    <>
-      <Row className="g-3">
-        {items.map((item) => (
+    <Row className="g-3">
+      {items.length > 0 &&
+        items.map((item) => (
           <Col
             key={item.id}
             xs={12}
@@ -18,8 +18,7 @@ function ItemList({ items }) {
             <Item item={item} />
           </Col>
         ))}
-      </Row>
-    </>
+    </Row>
   );
 }
 

@@ -1,42 +1,42 @@
 import { Container } from "react-bootstrap";
 import ItemList from "./ItemList";
 import { useEffect, useState } from "react";
-import { fetchData } from "../utils/fetchData";
-import { productsDatabase } from "../utils/productsDatabase";
 import { useParams } from "react-router-dom";
 import { BarLoader } from "react-spinners";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../utils/firebaseConfig";
 
-const ItemListContainer = (props) => {
+const ItemListContainer = () => {
   const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(false);
   const { categoryId } = useParams();
 
   useEffect(() => {
-    async function getData() {
-      setLoading(true);
+    const getData = async () => {
       try {
-        const result = await fetchData(
-          2000,
+        const q = query(
+          collection(db, "products"),
           categoryId === undefined
-            ? productsDatabase
-            : productsDatabase.filter(
-                (product) => product.category === Number(categoryId)
-              )
+            ? ""
+            : where("category", "==", Number(categoryId))
         );
-        setItems(result);
+
+        const products = await getDocs(q);
+
+        setItems(products.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
       } catch (error) {
         console.log(error);
-      } finally {
-        setLoading(false);
       }
-    }
+    };
     getData();
   }, [categoryId]);
 
   return (
     <Container className="mt-5">
-      {loading && <BarLoader width="100%" color="#36d7b7" className="mb-3" />}
-      <ItemList items={items} />
+      {items.length ? (
+        <ItemList items={items} />
+      ) : (
+        <BarLoader width="100%" color="#36d7b7" className="mb-3" />
+      )}
     </Container>
   );
 };
