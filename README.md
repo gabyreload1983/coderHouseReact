@@ -8,6 +8,15 @@
 
 ![](https://res.cloudinary.com/dpugly2tk/image/upload/v1669942480/sinapsis/2022-12-01_20-41-24_sq5vp6.gif)
 
+Este proyecto es sobre una ecommerce de productos electronicos y/o de computacion.
+Proximas caracteristicas a incluir:
+
+- Autenticacion con cuanta de Google.
+- Wishlist
+- Historial de ordenes de compra
+- Validar stock antes de generar orden de compra
+- Cart persistente
+
 ## Comenzando 🚀
 
 - Clonar el repo.
