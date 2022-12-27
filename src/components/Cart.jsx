@@ -15,7 +15,7 @@ import { BarLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 import { CartContext } from "../context/CartContext";
 
-function Cart(props) {
+function Cart() {
   const { cartList, removeItem, clear, calcSubtotal, calcTotal } =
     useContext(CartContext);
   const [loading, setLoading] = useState(false);
@@ -43,6 +43,7 @@ function Cart(props) {
           quantity: p.quantity,
         })),
         total: calcTotal(),
+        state: "generated",
       };
 
       const res = await createOrderInFirestore(order);

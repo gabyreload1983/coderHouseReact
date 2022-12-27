@@ -7,7 +7,7 @@ import { db } from "../utils/firebaseConfig";
 import { BarLoader } from "react-spinners";
 import { toast, ToastContainer } from "react-toastify";
 
-function ItemDetailContainer(props) {
+function ItemDetailContainer() {
   const [item, setItem] = useState({});
   const { itemId } = useParams();
 

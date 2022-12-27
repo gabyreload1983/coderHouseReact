@@ -6,7 +6,7 @@ import { BarLoader } from "react-spinners";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../utils/firebaseConfig";
 
-const ItemListContainer = (props) => {
+const ItemListContainer = () => {
   const [items, setItems] = useState([]);
   const { categoryId } = useParams();
 
